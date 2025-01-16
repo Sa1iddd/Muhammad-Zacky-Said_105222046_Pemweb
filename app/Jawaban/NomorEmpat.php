@@ -10,10 +10,22 @@ class NomorEmpat {
 
 	public function getJson () {
 
-		// Tuliskan code untuk mengambil semua jadwal, simpan di variabel $data
-		$data = [];
+		// mengambil seluruh data eveent
+        $events = Event::all();
 
-		return response()->json($data);
+        $eventsData = $events->map(function ($event) {
+            $color = ($event->user_id == Auth::id()) ? 'purple' : 'gray';
+            
+            return [
+                'id' => $event->id,
+                'title' => $event->name . ' - ' . $event->user->name,  
+                'start' => $event->start,
+                'end' => $event->end,
+                'color' => $color,  
+            ];
+        });
+
+        return response()->json($eventsData);
 	}
 }
 

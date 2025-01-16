@@ -10,6 +10,12 @@
 	@endif
 </div>
 
+<style>
+	.field-credential {
+		margin-bottom: 3px
+	}
+</style>
+
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
  	<div class="modal-dialog modal-dialog-centered" role="document">
     	<form class="modal-content" method="POST" action="{{ route('auth') }}">
@@ -20,10 +26,20 @@
         		</button>
       		</div>
 	      	<div class="modal-body">
-	        	<i> Tuliskan Inputan Form untuk login </i>
-	      	</div>
-	      	<div class="modal-footer">
-	        	<button type="submit" class="btn btn-primary"> Submit </button>
+				<form method="POST" action="{{ route('auth') }}">
+					@csrf
+					<div class="field-credential">
+						<label for="username" class="form-label">Email/Username</label>
+						<input type="text" class="form-control" id="username" name="username" required>
+					</div>
+					<div class="field-credential">
+						<label for="password" class="form-label">Password</label>
+						<input type="password" class="form-control" id="password" name="password" required>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary"> Submit </button>
+					</div>
+				</form>				
 	      	</div>
     	</form>
   	</div>
